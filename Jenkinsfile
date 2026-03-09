@@ -1,8 +1,9 @@
 pipeline {
 agent any
 
+
 tools {
-    maven 'Maven'
+    maven 'Maven3'
 }
 
 stages {
@@ -13,6 +14,12 @@ stages {
         }
     }
 
+    stage('Check Files') {
+        steps {
+            sh 'ls -la'
+        }
+    }
+
     stage('Build') {
         steps {
             sh 'mvn clean package'
@@ -20,5 +27,6 @@ stages {
     }
 
 }
+
 
 }
