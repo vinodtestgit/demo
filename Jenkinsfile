@@ -2,14 +2,9 @@ pipeline {
 agent any
 
 ```
-tools {
-    maven 'Maven3'
-    jdk 'JDK17'
-}
-
 stages {
 
-    stage('Checkout Code') {
+    stage('Checkout') {
         steps {
             git 'https://github.com/vinodtestgit/demo.git'
         }
@@ -17,33 +12,10 @@ stages {
 
     stage('Build') {
         steps {
-            bat 'mvn clean compile'
+            bat 'mvn clean package'
         }
     }
 
-    stage('Test') {
-        steps {
-            bat 'mvn test'
-        }
-    }
-
-    stage('Package') {
-        steps {
-            bat 'mvn clean package -DskipTests'
-        }
-    }
-
-    stage('Build Docker Image') {
-        steps {
-            bat 'docker build -t demo-app .'
-        }
-    }
-
-    stage('Run Container') {
-        steps {
-            bat 'docker run -d -p 8080:8080 demo-app'
-        }
-    }
 }
 ```
 
