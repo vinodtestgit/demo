@@ -5,7 +5,11 @@ package com.opargo.demo.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="users")
+@Table(name = "users",
+uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"email"}),
+    @UniqueConstraint(columnNames = {"name"})
+})
 public class User {
 
     @Id
